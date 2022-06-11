@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+    
+    <div class="col-md-6 pt-4 pl-5 pr-5">
+		<form action="/autenticar" method="post" >
+			<div class="row">
+				<div class="col">
+					<input type="text" name="email" class="form-control" placeholder="E-mail">
+				</div>
+				<div class="col">
+					<input type="password" name="senha" class="form-control" placeholder="Senha">
+				</div>
+				<div class="col-auto">
+					<button type="submit" class="btn btn-success mb-2">Entrar</button>
+				</div>
+			</div>
+			<?php if ($this->view->login == 'error') { ?>
+				
+				<span class="text text-danger" >Email e ou senha invalido(s)</span>
+				
+			<?php } ?>
+		</form>
+
+		<div class="row pt-5 pl-5 pr-5">
+			<div class="col pl-5 pr-5">
+				<a href="/inscreverse" class="btn btn-success btn-block mb-2">Inscrever-se</a>
+			</div>	
+		</div>
+
+
+    </div>
+
+  </div>
+</div>
