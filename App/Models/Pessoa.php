@@ -34,14 +34,21 @@ class Pessoa extends Model
     public function select()
     {
         $query = '
-            select 
-               id, nome, cpf, rg, data_nascimento, data_cadastro
-            from 
-            pessoas';
+            select * from 
+                pessoas 
+            inner join 
+                telefones on pessoas.id = telefones.id
+            inner join 
+                enderecos on pessoas.id = enderecos.id
+            inner join
+                estados   on estados.id = endereco_id
+            where 
+                pessoas.data_exclusao is null';
+            
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $pessoa = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-      
+    
         return $pessoa;
     }
 
@@ -53,7 +60,7 @@ class Pessoa extends Model
 
         $buscaTodosDados = '
             select 
-                nome,cpf,rg, data_cadastro,data_exclusao, data_atualizacao, data_nascimento, telefone,endereco,cep,numero,uf
+                nome,cpf,rg, data_cadastro, data_atualizacao, data_nascimento, telefone,endereco,cep,numero,uf
             from 
                 pessoas 
             inner join 
@@ -124,11 +131,11 @@ class Pessoa extends Model
      */
     public function delete()
     {
-        $query = "DELETE FROM pessoas WHERE id = :id";
+        $query = "UPDATE pessoas SET data_exclusao = :data_exclusao WHERE id = :id";
         $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':data_exclusao', date('Y/m/d H:i:s'));
         $stmt->bindValue(':id',$this->__get('id'));
         $stmt->execute(); 
-        return $stmt->rowCount();
     }
 
     

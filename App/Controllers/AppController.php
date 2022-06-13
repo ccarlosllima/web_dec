@@ -145,20 +145,20 @@ class AppController extends Action
         session_start();
 
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
-        
-            $pessoa = Container::getModel('pessoa');
-
+         
             if (isset($_GET['id']) && $_GET['id'] != '') {
-        
-            $pessoa->__set('id', $_GET['id']);
-            }
 
-            $pessoa->delete();
+                $pessoa = Container::getModel('pessoa');
+                $pessoa->__set('id', $_GET['id']);
+                $pessoa->delete();
+
+                header('Location:\pessoa');
+                exit;
+            }
           
         }else {
 
             header('Location:/?acesso=negado');
-
             exit;
         }
 
