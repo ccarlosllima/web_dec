@@ -19,10 +19,12 @@ class Pessoa extends Model
     private $dataAtualizacao;
     private $dataExclusao;
     
+    // pega valor de um determinado atributo
     public function __get($atributo)
     {
         return $this->$atributo;
     }
+    // seta os atributos do objeto
     public function __set($atributo, $value)
     {
         $this->$atributo = $value;
@@ -33,6 +35,7 @@ class Pessoa extends Model
      */
     public function select()
     {
+        // seleciona todos os os campos das tabelas onde a data de exclusão de pessoas forem  null
         $query = '
             select * from 
                 pessoas 
@@ -57,7 +60,7 @@ class Pessoa extends Model
      */
     public function selectPessoaDetalhe()
     {
-
+        // seleciona todos campos das tabelas com base em um ID
         $buscaTodosDados = '
             select 
                 nome,cpf,rg, data_cadastro, data_atualizacao, data_nascimento, telefone,endereco,cep,numero,uf
@@ -130,7 +133,8 @@ class Pessoa extends Model
      * MÉTODO RESPONSÁVEL POR REMOVER UM REGISTRO
      */
     public function delete()
-    {
+    {   
+        // Executa a destivação do registro
         $query = "UPDATE pessoas SET data_exclusao = :data_exclusao WHERE id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':data_exclusao', date('Y/m/d H:i:s'));
@@ -140,14 +144,15 @@ class Pessoa extends Model
 
     
     /**
-     * MÉTODO RESPONSÁVEL POR ATUALIZAR UM REGISTRO
+     * MÉTODO RESPONSÁVEL POR ATUALIZAR REGISTROS
      */
+
     public function update()
     {
+        // atualiza registros os dados de pessoa
         $updatePessoa = ' UPDATE pessoas SET nome = :nome, cpf = :cpf,rg = :rg,data_atualizacao = :data_atualizacao,
                         data_nascimento = :dt_nas
                         where id = :id';
-
         $stmt = $this->db->prepare($updatePessoa);
         $stmt->bindValue(':nome', $this->__get('nome'));
         $stmt->bindValue(':cpf', $this->__get('cpf'));
@@ -158,6 +163,7 @@ class Pessoa extends Model
         $stmt->execute();
 
 
+        // atualiza registros dados de endereço
         $updateEndereco = 'UPDATE enderecos SET endereco = :ender, cep = :cep, numero = :num where id = :id';
         $stmt = $this->db->prepare($updateEndereco);
         $stmt->bindValue(':ender', $this->__get('endereco'));
@@ -166,13 +172,14 @@ class Pessoa extends Model
         $stmt->bindValue(':id', $this->__get('id'));
         $stmt->execute();
 
-
+        // atualiza os dados de estados
         $updateEstado = ' UPDATE estados SET uf = :uf where id = :id';
         $stmt = $this->db->prepare($updateEstado);
         $stmt->bindValue(':uf', $this->__get('uf'));
         $stmt->bindValue(':id', $this->__get('id'));
         $stmt->execute();
 
+        // atualiza os dados de telefone
         $updateTelefone = 'UPDATE telefones SET telefone = :fone where id = :id';
         $stmt = $this->db->prepare($updateTelefone);
         $stmt->bindValue(':fone', $this->__get('telefone'));

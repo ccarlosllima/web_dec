@@ -1,6 +1,5 @@
-// Recupera os dados do Formulário
 
-var form = document.getElementById('formPessoa')
+// Recupera os dados do Formulário
 var nome = document.getElementById('nome-p')
 var dataNascimento = document.getElementById('data_nascimento')
 var cpf = document.getElementById('cpf')

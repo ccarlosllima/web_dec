@@ -1,11 +1,9 @@
 <form class="form-login" action="/registrar" method="post">
 	<div class="">
-		<input class="input-texto form-control" type="text" name="nome"  placeholder="Nome">
-		<input class="input-texto form-control" type="email" name="email"  placeholder="E-mail">
-		<input class="input-senha form-control" type="password" name="senha" placeholder="Senha">
+		<input class="input-texto form-control" type="text" name="nome" required placeholder="Nome">
+		<input class="input-texto form-control" type="email" name="email" required placeholder="E-mail">
+		<input class="input-senha form-control" type="password" name="senha" required placeholder="Senha">
 		<button class="input-submit"  type="submit" >Cadastrar</button>
+		 <a href="/" class="btn btn-success p-2" style="margin-left:75px;width:140px;">Voltar</a>
 	</div>
-	<?php if ($this->view->login == 'error') { ?>
-		<span class="text text-danger" >Email e ou senha invalido(s)</span>
-	<?php } ?>
 </form>

@@ -19,14 +19,7 @@ class IndexController extends Action
 	 * MÉTODO RESPONSÁVEL POR EXIBIR VIWE DE INSCRIÇÃO PARA NOVOS USUÁRIOS
 	 */
 	public function inscreverse() 
-	{	
-		$this->view->usuario = array(
-			'nome'  => '',
-			'email' => '',
-			'senha' => ''
-		);
-		$this->view->errorCadastro = false;
-
+	{
 		$this->render('inscreverse');
 	}
 	

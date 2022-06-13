@@ -63,31 +63,35 @@ class AppController extends Action
 
                 // Lógica para atualizar os registros
                 $pessoa = Container::getModel('pessoa');
-
+               
+                // informaçõa de pessoa
                 $pessoa->__set('id', $_POST['id']);
                 $pessoa->__set('nome', $_POST['nome']);
                 $pessoa->__set('cpf',$_POST['cpf']);
                 $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
                 $pessoa->__set('rg',$_POST['rg']);
 
+                // informação de endereco
                 $pessoa->__set('cep',$_POST['cep']);
                 $pessoa->__set('numero',$_POST['numero']);
                 $pessoa->__set('endereco',$_POST['endereco']);
                 
+                // informação de estado
                 $pessoa->__set('uf',$_POST['uf']);
                 
-                $pessoa->__set('telefone',$_POST['telefone']);
+                // informação de telefone
+                $pessoa->__set('telefone',$_POST['telefone']);                                                                        
 
-
-                                                                                      
-
+                // executa a atualização
                 $pessoa->update();
 
                 header('Location:/pessoa');
             }else {
 
-                // realiza uma instância de pessoa e preenche seus atriibutos   
-                $pessoa = Container::getModel('pessoa');         
+                // realiza uma instância de pessoa 
+                $pessoa = Container::getModel('pessoa'); 
+                
+                // preenche seus atributos do objeto
                 $pessoa->__set('nome', $_POST['nome']);
                 $pessoa->__set('cpf',$_POST['cpf']);
                 $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
@@ -97,7 +101,8 @@ class AppController extends Action
                 $pessoa->__set('cep',$_POST['cep']);
                 $pessoa->__set('numero',$_POST['numero']);
                 $pessoa->__set('endereco',$_POST['endereco']);
-            
+                
+                // salva as informações
                 $pessoa->save();
 
                 header('location:/pessoa');
@@ -112,7 +117,9 @@ class AppController extends Action
 
         return true ;
     }
-
+    /**
+     * MÉTODO RESPONSÁVEL POR EXIBIR FORMULÁRIO COM AS INFORMAÇÕES PARA ATUALIZAÇÃO
+     */
     public function edit()
     {
         session_start();
@@ -120,15 +127,18 @@ class AppController extends Action
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
         
             if (isset($_GET['id']) && $_GET['id'] != '') {
-
+                // envia o ID para o model
                 $pessoa = Container::getModel('pessoa');
                 $pessoa->__set('id', $_GET['id']);
 
+                // busca as informações
                 $dados = $pessoa->selectPessoaDetalhe();
-                $this->view->pessoa = $dados;
-                
-                return $this->render('cadastro');
 
+                // envia para view
+                $this->view->pessoa = $dados; 
+                 
+                // renderiza a view
+                return $this->render('cadastro');
             }
           
         }else {
@@ -139,17 +149,23 @@ class AppController extends Action
         }
     }
 
-
+/**
+ * MÉTODO RESPONSÁVEL POR DESATIVAR UM REGISTRO
+ */
     public function destroy()
     {
         session_start();
-
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
          
             if (isset($_GET['id']) && $_GET['id'] != '') {
-
+                
+                // realiza uma instância de pessoa 
                 $pessoa = Container::getModel('pessoa');
+
+                // envia o ID para o model
                 $pessoa->__set('id', $_GET['id']);
+
+                // desativa o registro
                 $pessoa->delete();
 
                 header('Location:\pessoa');
@@ -170,16 +186,21 @@ class AppController extends Action
 
         if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
             
+            // realiza intância de pessoa
             $pessoa = Container::getModel('pessoa');
 
             if (isset($_GET['id']) && $_GET['id'] != '') {
-    
+
+                // envia o ID para o model
                 $pessoa->__set('id', $_GET['id']);
-    
+                
+                // obtem o array de pessoas
                 $dados = $pessoa->selectPessoaDetalhe();
-    
+                
+                // envia o array para view
                 $this->view->pessoa = $dados;
-    
+                
+                // renderiza a view
                 $this->render('detalhe');
             }
                  
