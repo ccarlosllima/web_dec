@@ -1,19 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="/create">Novo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="/pessoa">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand mr-5" href="/sair">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <div class="card text-center mt-5">
     <div class="card-header p-4">
     
     </div>
     <div class="card-body">
-        <p><?php echo $this->$view->pessoa['nome']?></p>
-        <p><?php echo $this->$view->pessoa['cpf']?></p>
-        <p><?php echo $this->$view->pessoa['rg']?></p>
-        <p><?php echo $this->$view->pessoa['data_nascimento']?></p>
-        <p><?php echo $this->$view->pessoa['data_cadastro']?></p>
-        <p><?php echo $this->$view->pessoa['telefone']?></p>
-        <p><?php echo $this->$view->pessoa['endereco']?></p>
-        <p><?php echo $this->$view->pessoa['numero']?></p>
-        <p><?php echo $this->$view->pessoa['cep']?></p>
-        <p><?php echo $this->$view->pessoa['uf']?></p>
+        <p><?php echo $this->view->pessoa['nome']?></p>
+        <p><?php echo $this->view->pessoa['cpf']?></p>
+        <p><?php echo $this->view->pessoa['rg']?></p>
+        <p><?php echo $this->view->pessoa['data_nascimento']?></p>
+        <p><?php echo $this->view->pessoa['data_cadastro']?></p>
+        <p><?php echo $this->view->pessoa['telefone']?></p>
+        <p><?php echo $this->view->pessoa['endereco']?></p>
+        <p><?php echo $this->view->pessoa['numero']?></p>
+        <p><?php echo $this->view->pessoa['cep']?></p>
+        <p><?php echo $this->view->pessoa['uf']?></p>
 
     </div>
     <div class="card-footer text-muted">

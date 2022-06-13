@@ -10,9 +10,11 @@ abstract class Action {
 		$this->view = new \stdClass();
 	}
 
+	/**
+	 * MÉTODO RESPONSÁVEL POR RENDERIZAR VIEW
+	 */
 	protected function render($view, $layout = 'layout') {
 		$this->view->page = $view;
-
 
 		if(file_exists("../App/Views/".$layout.".phtml")) {
 			require_once "../App/Views/".$layout.".phtml";
@@ -21,6 +23,9 @@ abstract class Action {
 		}
 	}
 
+	/**
+	 * MÉTODO RESPONSÁVEL PELO CONTEÚDO DA VIEW
+	 */
 	protected function content() {
 		$classAtual = get_class($this);
 

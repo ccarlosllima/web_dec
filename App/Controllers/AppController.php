@@ -8,14 +8,27 @@ use MF\Model\Container;
 class AppController extends Action 
 {
     /**
-     * MÉTODO RESPONSÁVEL POR LISTAR PESSOAS
+     * MÉTODO RESPONSÁVEL POR EXECUTAR A LISTAGEM PESSOAS
      */
     public function index()
     {   
-        $pessoa = Container::getModel('pessoa');
-        $lista_pessoas = $pessoa->select();
-        $this->$view->pessoas = $lista_pessoas; 
-        return $this->render('listagem');
+        // inicia a sessão
+        session_start();
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+            
+            // realiza uma instância de pessoa
+            $pessoa = Container::getModel('pessoa');
+            $listaPessoas = $pessoa->select();
+
+            // cria uma variavél (pessoa) na view, atribui o resultado de (lista_pessoas)
+            $this->view->pessoas = $listaPessoas; 
+
+            return $this->render('listagem');
+        }else {
+
+            header('Location:/?acesso=negado');
+        }
+
     }
 
     /**
@@ -23,7 +36,18 @@ class AppController extends Action
      */
     public function create()
     {
-        return $this->render('cadastro');
+        // inicia a sessão
+        session_start();
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+        
+            // renderiza o formulário
+            return $this->render('cadastro');
+          
+        }else {
+            // redirecionamento para raiz
+            header('Location:/?acesso=negado');
+            exit;
+        }
     }
     
     /**
@@ -31,80 +55,143 @@ class AppController extends Action
      */
     public function store()
     {
-        $pessoa = Container::getModel('pessoa');
-        
-        $pessoa->__set('nome', $_POST['nome']);
-        $pessoa->__set('cpf',$_POST['cpf']);
-        $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
-        $pessoa->__set('rg',$_POST['rg']);
-        $pessoa->__set('telefone',$_POST['telefone']);
-        $pessoa->__set('uf',$_POST['uf']);
-        $pessoa->__set('cep',$_POST['cep']);
-        $pessoa->__set('numero',$_POST['numero']);
-        $pessoa->__set('endereco',$_POST['endereco']);
-       
-        $pessoa->save();
+        session_start();
 
-        header('location:/pessoa');
-        exit;
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') { 
+
+            if (!empty($_POST['id'])) {
+
+                // Lógica para atualizar os registros
+                $pessoa = Container::getModel('pessoa');
+
+                $pessoa->__set('id', $_POST['id']);
+                $pessoa->__set('nome', $_POST['nome']);
+                $pessoa->__set('cpf',$_POST['cpf']);
+                $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
+                $pessoa->__set('rg',$_POST['rg']);
+                $pessoa->__set('telefone',$_POST['telefone']);
+                $pessoa->__set('uf',$_POST['uf']);
+                $pessoa->__set('cep',$_POST['cep']);
+                $pessoa->__set('numero',$_POST['numero']);
+                $pessoa->__set('endereco',$_POST['endereco']);
+                                                                                      
+
+                $pessoa->update();
+
+                header('Location:/pessoa?status=sucesso');
+            }else {
+
+                // realiza uma instância de pessoa e preenche seus atriibutos   
+                $pessoa = Container::getModel('pessoa');         
+                $pessoa->__set('nome', $_POST['nome']);
+                $pessoa->__set('cpf',$_POST['cpf']);
+                $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
+                $pessoa->__set('rg',$_POST['rg']);
+                $pessoa->__set('telefone',$_POST['telefone']);
+                $pessoa->__set('uf',$_POST['uf']);
+                $pessoa->__set('cep',$_POST['cep']);
+                $pessoa->__set('numero',$_POST['numero']);
+                $pessoa->__set('endereco',$_POST['endereco']);
+            
+                $pessoa->save();
+
+                header('location:/pessoa');
+                exit;
+            }
+
+        }else {
+
+            header('Location:/?acesso=negado');
+            exit;
+        }    
 
         return true ;
     }
 
     public function edit()
     {
-        $pessoa = Container::getModel('pessoa');
+        session_start();
 
-        if (isset($_GET['id']) && $_GET['id'] != '') {
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
         
-            $res = $pessoa->selectById($_GET['id']);
+            if (isset($_GET['id']) && $_GET['id'] != '') {
+
+                $pessoa = Container::getModel('pessoa');
+                $pessoa->__set('id', $_GET['id']);
+
+                $dados = $pessoa->selectPessoaDetalhe();
+                $this->view->pessoa = $dados;
+                
+                return $this->render('cadastro');
+
+            }
+          
+        }else {
+
+            header('Location:/?acesso=negado');
+
+            exit;
         }
+    }
+
+    public function update()
+    {
+        
     }
 
 
     public function destroy()
     {
-        $pessoa = Container::getModel('pessoa');
-        if (isset($_GET['id']) && $_GET['id'] != '') {
+        session_start();
+
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+        
+            $pessoa = Container::getModel('pessoa');
+
+            if (isset($_GET['id']) && $_GET['id'] != '') {
         
             $pessoa->__set('id', $_GET['id']);
+            }
+
+            $pessoa->delete();
+          
+        }else {
+
+            header('Location:/?acesso=negado');
+
+            exit;
         }
 
-        $pessoa->delete();
-
-    }
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function dd($dados = [])
-    {
-        echo "<pre>";
-        print_r($dados);
-        echo "</pre>";
-        echo "<hr>";
     }
     
+    public function exibirDetalhe()
+    {
+        session_start();
+
+        if ($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+            
+            $pessoa = Container::getModel('pessoa');
+
+            if (isset($_GET['id']) && $_GET['id'] != '') {
+    
+                $pessoa->__set('id', $_GET['id']);
+    
+                $dados = $pessoa->selectPessoaDetalhe();
+    
+                $this->view->pessoa = $dados;
+    
+                $this->render('detalhe');
+            }
+            
+          
+        }else {
+
+            header('Location:/?acesso=negado');
+
+            exit;
+        }
+    }
+
 }
 
 ?>
