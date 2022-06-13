@@ -15,4 +15,4 @@ ________________________________________________________________________________
 
 O ponto de partida do sistema e o arquivo index.php contido em /App/public.
 Acesse o projeto e e vá até App/public, se você tiver o servidor enbutido de php execute o seguinte
-comando: php -S localhost:8000. a aplicação estara sendo serivida nessa porta. 
+comando: php -S localhost:8000. a aplicação estara sendo servida nessa porta. 
