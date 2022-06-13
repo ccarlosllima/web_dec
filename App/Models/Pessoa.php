@@ -137,37 +137,42 @@ class Pessoa extends Model
      */
     public function update()
     {
-        $query = '
-            UPDATE pessoas SET nome = ":nome", cpf = ":cpf",rg = ":rg",data_atualizacao = ":data_atualizacao",
-                data_nascimento = ":dt_nas"
-            where id = ":id";
+        $updatePessoa = ' UPDATE pessoas SET nome = :nome, cpf = :cpf,rg = :rg,data_atualizacao = :data_atualizacao,
+                        data_nascimento = :dt_nas
+                        where id = :id';
 
-            UPDATE enderecos SET endereco = ":end", cep = ":cep", numero = ":num"
-            where id = ":id";
-
-            UPDATE estados SET uf = ":uf"
-            where id = ":id";
-    
-            UPDATE telefones SET telefone = ":telefone"
-            where id = ":id";';
-        $stmt = $this->db->prepare($query);
+        $stmt = $this->db->prepare($updatePessoa);
         $stmt->bindValue(':nome', $this->__get('nome'));
         $stmt->bindValue(':cpf', $this->__get('cpf'));
         $stmt->bindValue(':rg', $this->__get('rg'));
         $stmt->bindValue(':data_atualizacao', date('Y/m/d H:i:s'));
         $stmt->bindValue(':dt_nas', $this->__get('dataNascimento'));
         $stmt->bindValue(':id', $this->__get('id'));
-        $stmt->bindValue(':end', $this->__get('endereco'));
+        $stmt->execute();
+
+
+        $updateEndereco = 'UPDATE enderecos SET endereco = :ender, cep = :cep, numero = :num where id = :id';
+        $stmt = $this->db->prepare($updateEndereco);
+        $stmt->bindValue(':ender', $this->__get('endereco'));
         $stmt->bindValue(':cep', $this->__get('cep'));
         $stmt->bindValue(':num', $this->__get('numero'));
         $stmt->bindValue(':id', $this->__get('id'));
+        $stmt->execute();
+
+
+        $updateEstado = ' UPDATE estados SET uf = :uf where id = :id';
+        $stmt = $this->db->prepare($updateEstado);
         $stmt->bindValue(':uf', $this->__get('uf'));
         $stmt->bindValue(':id', $this->__get('id'));
-        $stmt->bindValue(':uf', $this->__get('uf'));
+        $stmt->execute();
+
+        $updateTelefone = 'UPDATE telefones SET telefone = :fone where id = :id';
+        $stmt = $this->db->prepare($updateTelefone);
+        $stmt->bindValue(':fone', $this->__get('telefone'));
         $stmt->bindValue(':id', $this->__get('id'));
-        $results = $stmt->execute();
-        
-        return $this;
+        $stmt->execute();
+
+              
     }
 }
 

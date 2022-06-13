@@ -69,16 +69,21 @@ class AppController extends Action
                 $pessoa->__set('cpf',$_POST['cpf']);
                 $pessoa->__set('dataNascimento',$_POST['data_nascimento']);
                 $pessoa->__set('rg',$_POST['rg']);
-                $pessoa->__set('telefone',$_POST['telefone']);
-                $pessoa->__set('uf',$_POST['uf']);
+
                 $pessoa->__set('cep',$_POST['cep']);
                 $pessoa->__set('numero',$_POST['numero']);
                 $pessoa->__set('endereco',$_POST['endereco']);
+                
+                $pessoa->__set('uf',$_POST['uf']);
+                
+                $pessoa->__set('telefone',$_POST['telefone']);
+
+
                                                                                       
 
                 $pessoa->update();
 
-                header('Location:/pessoa?status=sucesso');
+                header('Location:/pessoa');
             }else {
 
                 // realiza uma instância de pessoa e preenche seus atriibutos   
@@ -134,11 +139,6 @@ class AppController extends Action
         }
     }
 
-    public function update()
-    {
-        
-    }
-
 
     public function destroy()
     {
@@ -182,8 +182,7 @@ class AppController extends Action
     
                 $this->render('detalhe');
             }
-            
-          
+                 
         }else {
 
             header('Location:/?acesso=negado');

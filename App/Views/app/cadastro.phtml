@@ -9,7 +9,7 @@
 				<li class="nav-item">
 					<a class="navbar-brand" href="/pessoa">Home</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" >
 					<a class="navbar-brand mr-5" href="/sair">Sair</a>
 				</li>
 			</ul>
@@ -30,23 +30,23 @@
 			$pessoa['id'] = $_GET['id'];
 		} ?>
 
-			<form class="row g-3 form-pessoa" novalidat action="/store" method="post">
+			<form class="row g-3 form-pessoa" id="formPessoa" action="/store" method="post">
 				<input type="hidden" name="id" value="<?php echo $pessoa['id'] ?>" >
 				<div class="col-6 mt-3">
-					<label class="form-label" value="carllos"  for="nome">Nome</label>
-					<input class="form-control" value="<?php echo $pessoa['nome']?>" required id="nome" type="text" name="nome" placeholder="Ex: José da Silva ..." >
+					<label class="form-label"  for="nome">Nome</label>
+					<input class="form-control" value="<?php echo $pessoa['nome']?>"  id="nome-p" type="text" name="nome" placeholder="Ex: José da Silva ..." >
 				</div> 
 				<div class="col-3 mt-3">
 					<label class="form-label" for="data_nascimento">Data de Nascimento</label>
-					<input class="form-control" value="<?php echo $pessoa['data_nascimento']?>" required id="data_nascimento" type="date" name="data_nascimento">
+					<input class="form-control" value="<?php echo $pessoa['data_nascimento']?>"  id="data_nascimento" type="date" name="data_nascimento">
 				</div>
 				<div class="col-3 mt-3">
 					<label class="form-label" for="cpf">CPF</label>
-					<input class="form-control" value="<?php echo $pessoa['cpf']?>" required id="cpf" type="text" name="cpf" placeholder="Ex: 333.444.777-15">
+					<input class="form-control" value="<?php echo $pessoa['cpf']?>"  id="cpf" type="text" name="cpf" placeholder="Ex: 333.444.777-15">
 				</div> 
 				<div class="col-3 mt-3">
 					<label class="form-label" for="rg">RG</label>
-					<input class="form-control" value="<?php echo $pessoa['rg']?>" required id="rg" type="text" name="rg" placeholder="Ex: 7133315">
+					<input class="form-control" value="<?php echo $pessoa['rg']?>"  id="rg" type="text" name="rg" placeholder="Ex: 7133315">
 				</div> 
 				<div class="col-5 mt-3">
 					<label class="form-label" for="telefone">Telefone</label>
@@ -56,22 +56,23 @@
 				
 				<div class="col-2 mt-3">
 					<label class="form-label" for="cep">CEP</label>
-					<input class="form-control" value="<?php echo $pessoa['cep']?>" required id="cep"type="text" name="cep" placeholder="Ex: 6878-000">
+					<input class="form-control" value="<?php echo $pessoa['cep']?>"  id="cep"type="text" name="cep" placeholder="Ex: 6878-000">
 				</div>
 				<div class="col-2 mt-3">
 					<label class="form-label" for="uf">UF</label>
-					<input class="form-control" value="<?php echo $pessoa['uf']?>" required id="uf" type="text" name="uf" placeholder="Ex: SP">
+					<input class="form-control" value="<?php echo $pessoa['uf']?>"  id="uf" type="text" name="uf" placeholder="Ex: SP">
 				</div> 
 				<div class="col-6 mt-3">
 					<label class="form-label" for="numero">Número</label>
-					<input class="form-control" value="<?php echo $pessoa['numero']?>" required id="numero" type="text" name="numero"placeholder="Ex: 540">
+					<input class="form-control" value="<?php echo $pessoa['numero']?>"  id="numero" type="text" name="numero"placeholder="Ex: 540">
 				</div> 
 				<div class="col-6 mt-3">
 					<label class="form-label" for="endereco">Endereço</label>
-					<input class="form-control" value="<?php echo $pessoa['endereco']?>" required id="endereco" type="text" name="endereco" placeholder="Ex: Rua Dr. Ferreira">
+					<input class="form-control" value="<?php echo $pessoa['endereco']?>" id="endereco" type="text" name="endereco" placeholder="Ex: Rua Dr. Ferreira">
 				</div> 
 				<div class="col-1">
-					<button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
+					<!-- <button class="btn btn-primary mt-3"  type="submit">Cadastrar</button> -->
+					<input class="btn btn-success mt-3" type="submit" onclick="return valido()" value="Cadastrar">
 				</div>
 			</form>
 		</div>	
