@@ -22,16 +22,56 @@
     
     </div>
     <div class="card-body">
-        <p><?php echo $this->view->pessoa['nome']?></p>
-        <p><?php echo $this->view->pessoa['cpf']?></p>
-        <p><?php echo $this->view->pessoa['rg']?></p>
-        <p><?php echo $this->view->pessoa['data_nascimento']?></p>
-        <p><?php echo $this->view->pessoa['data_cadastro']?></p>
-        <p><?php echo $this->view->pessoa['telefone']?></p>
-        <p><?php echo $this->view->pessoa['endereco']?></p>
-        <p><?php echo $this->view->pessoa['numero']?></p>
-        <p><?php echo $this->view->pessoa['cep']?></p>
-        <p><?php echo $this->view->pessoa['uf']?></p>
+        <div class="row " >
+            <div class="col-4">
+                <label>Nome:</label>
+                <input type="text"  class=" form-control form-control-lg" value="<?php echo $this->view->pessoa['nome']?>" Disabled >
+            </div>
+            <div class="col-4 mt-3">
+                <label >CPF:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['cpf']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>RG:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['rg']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>Data de Nascimento:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['data_nascimento']?>" Disabled >
+            </div>  
+            <div clas="col-4 mt-2">
+                <label>Fone:</label>
+                <input  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['telefone']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>Endereço:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['endereco']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>Casa Nº:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['numero']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>CEP:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['cep']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label for="">UF:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['uf']?>" Disabled >
+            </div>
+            <div class="col-4 mt-2">
+                <label>Cadastrado em:</label>
+                <input type="text"  class="form-control form-control-lg" value="<?php echo $this->view->pessoa['data_cadastro']?>" Disabled >
+            </div>
+        </div>
+
+
+
+        <!-- <div class="form-group row">
+            <label class="col-sm-2 col-form-label">UF</label>
+            <div class="col-sm-10">
+            <input type="txt" class="form-control" value="<?php echo $this->view->pessoa['uf']?>">
+        </div> -->
 
     </div>
     <div class="card-footer text-muted">

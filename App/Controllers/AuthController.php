@@ -17,7 +17,7 @@ class AuthController extends Action
 
         // recupera os dados do formulário e seta os atributos de da classe usuário
         $usuario->__set('email', $_POST['email']);
-        $usuario->__set('senha', $_POST['senha']);
+        $usuario->__set('senha', md5($_POST['senha']));
 
         // realiza a autenticação
         $usuario->autenticar();

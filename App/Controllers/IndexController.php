@@ -34,7 +34,7 @@ class IndexController extends Action
 		// preenche os atributos da classe
 		$usuario->__set('nome',$_POST['nome']);
 		$usuario->__set('email',$_POST['email']);
-		$usuario->__set('senha',$_POST['senha']);
+		$usuario->__set('senha',md5($_POST['senha']));
 
 		//verifica se o usuário existe 
 		if ($usuario->validarCadastro() && count($usuario->getUsuarioPorEmail()) == 0) {	
