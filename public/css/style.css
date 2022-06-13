@@ -10,6 +10,63 @@ form,label{
     margin-bottom: 1px;
     float: left;
 }
-input {
-    border: 2px solid red;
+
+
+/* ====================================== */
+/* Inicio estilização formulário de login / inscrever-se*/
+.form-login{
+    background-color: hsl(0, 6%, 93%);
+    max-height: 400px;
+    width: 30%;
+    padding: 20px;
+    position: absolute;
+    border: 1px solid gainsboro;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
 }
+.input-texto{
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    margin: 10px 0;
+
+
+}
+input:focus{
+    box-shadow:0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+.input-senha{
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    margin: 10px 0;
+
+}
+.input-submit{
+    border-radius: 5px;
+    width: 40%;
+    height: 45px;   
+    cursor: pointer;
+    background-color: #4fa845;
+    color: white;
+    border: 1px solid gainsboro;
+}
+.link-inscreverse{
+    width: 40%;
+    margin-left: 65px;
+    height: 45px;
+    padding-top: 10px;
+}
+
+.input-invalido {
+    border: red 1px solid;
+}
+
+.input-valido {
+    border: #4fa845 1px solid;
+}
+/* Fim estilização formulário de login / inscrever-se */
